@@ -1,0 +1,23 @@
+1. run the stored procedure from the SQL by using a query
+https://dotnetexperts.home.blog/2019/04/17/17-apr-2019/
+
+if not working,
+create NEW query and see it works
+
+the query must work from within the SQL
+
+2. test with c# 
+
+if not working,
+
+create c# console app, run the query from the app
+
+3. go back to WPF
+create simple code like in (2) that runs the query
+
+4. run again from within the template
+
+_
+
+
+

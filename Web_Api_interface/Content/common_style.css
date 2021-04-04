@@ -1,0 +1,104 @@
+﻿body {
+    background-color: #73BBEE;
+    background-image: url('/ViewsImages/FlightSystemMain/background.png');
+}
+
+iframe {
+    border: 0;
+}
+
+.Box {
+    width: 100%;
+    height: 100px;
+}
+
+.editCustomers {
+    visibility: hidden;
+    display: none;
+}
+.editCustomersFirstName {
+    visibility: hidden;
+    display: none;
+}
+
+.notEditCustomers {
+    visibility: visible;
+    display: block;
+}
+
+.FlightsTable {
+    width: 80%;
+    alignment-adjust: middle;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background: #5382a5;
+    padding: 2px;
+    border-spacing: 20px;
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.Centering {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    background: #004679;
+}
+
+tr#_flightTable {
+    background-image: linear-gradient(#5685a6, #326a93);
+    border-bottom: 1px solid #0a4d7e;
+}
+
+tr._flightTable {
+    background-image: linear-gradient(#5685a6, #326a93);
+    border-bottom: 1px solid #0a4d7e;
+}
+
+.onTopOfTable {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    alignment-adjust: middle;
+    color: white;
+    font-family: Arial;
+    font-size: 12px;
+    padding: 0px;
+    background: #004679;
+}
+
+.statusBox {
+    margin: 5px;
+    padding: 3px;
+    width: 60%;
+}
+
+.upperBox {
+    font-weight: bold;
+}
+
+/* The next two classes are for "Sign in with Google" button */
+.g-signin2 {
+    width: 100%;
+}
+
+.g-signin2 > div {
+        margin: 0 auto;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload-button {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 2px 12px;
+    cursor: pointer;
+}

@@ -1,0 +1,23 @@
+﻿<table border ="1"  class="FlightsTable">
+       <tr>
+           <td>
+               User Name:
+           </td>
+           <td>
+               <input type="text" id="login_iframe_username" />
+           </td>
+       </tr> 
+       <tr>
+           <td>
+               Password:
+           </td>
+           <td>
+               <input type="text" id="login_iframe_password" />
+           </td>
+       </tr>
+    </table>
+    <br />
+    <input class="Centering" type="button" value="Login" onclick="pullAllCustomers($('#login_iframe_username').val(), $('#login_iframe_password').val());"/>
+    
+
+

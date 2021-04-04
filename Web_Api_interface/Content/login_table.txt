@@ -1,0 +1,30 @@
+﻿<table border ="1"  class="FlightsTable">
+       <tr>
+           <td>
+               User Name:
+           </td>
+           <td>
+               <input type="text" id="login_iframe_username" />
+           </td>
+       </tr> 
+       <tr>
+           <td>
+               Password:
+           </td>
+           <td>
+               <input type="text" id="login_iframe_password" />
+           </td>
+       </tr>
+    </table>
+    <br />
+    <input class="Centering" type="button" value="Login" onclick="pullAllCustomers($('#login_iframe_username').val(), $('#login_iframe_password').val());"/>
+    <br />
+
+    <!-- th all following code is for Google autentication -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+     <div onclick="pullAllCustomers();" style="align-items: center; justify-content: center;" id="my-signin2" class="g-signin2" data-onsuccess="onSignIn"  data-ux_mode="redirect"  data-longtitle="true"></div>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+

@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let allCountries = [];
+
+      $(document).ready(function () {
+
+
+          $.ajax({
+              //url: `https://localhost:44326/api/anonymoususer/getallflights`, //Send Ajax To Get All Flights.
+              url: `https://localhost:44361/api/AnonimousUserFacade/GetAllFlights`, //Send Ajax To Get All Flights.
+          }).then(
+              function (flights) {
+
+
+
+                          $.ajax({
+                                  //url: `https://localhost:44326/api/anonymoususer/getallcountries`, //Send Ajax To Get All Countries.
+                                  url: `https://localhost:44361/api/AnonimousUserFacade/GetAllCountries`, //Send Ajax To Get All Countries.
+                                }).then(function (countries) {
+                                  //console.log(countries);
+                                    $.each(countries, function (i, country) {
+
+                                        //console.log(`${i}: `);
+                                        //console.log(country);
+
+                                    $("#OriginCountry").append(
+                                        `<option value=${country.COUNTRY_NAME}>${country.COUNTRY_NAME}</option>`
+                                    );
+                                    $("#DestinationCountry").append(
+                                        `<option value=${country.ID}>${country.COUNTRY_NAME}</option>`
+                                    );
+                                  });
+                                });
+
+
+
+
+          buildTable(flights);
+        });
+      });
+
+      function buildTable(flights) {
+        console.log(flights);
+          $.each(flights, function (i, flight) {
+
+              //console.log(`${i}: `);
+              //console.log(flight);
+
+          $("#flights-table").append(
+            "<tr>" +
+              "<td>" +
+              flight.Adorning +
+              "</td>" +
+              "<td>" +
+              flight.AirlineName +
+              "</td>" +
+              "<td>" +
+              flight.DepartureCountryName +
+              "</td>" +
+              "<td>" +
+              flight.DEPARTURE_TIME +
+              "</td>" +
+              "<td>" +
+              flight.DestinationCountryName +
+              "</td>" +
+              "<td>" +
+              flight.LANDING_TIME +
+              "</td>" +
+              "<td>" +
+              flight.RemainingTickets +
+              "</td>" +
+              "<tr>"
+          );
+        });
+        }
+        //function searchFlights(fromCtr, toCtr, orderBy) {
+        function searchFlights(searchQuery, searchCriterion, sortingCriterion) {
+          $.ajax({
+          //url: `https://localhost:44326/api/anonymoususer/vanillasearchflights?searchQuery=${searchQuery}&to=${toCtr}`, // Search Flights By Filters
+            url: `../api/AnonimousUserFacade/GetFlightsByQueryGet?searchQuery=${searchQuery}&searchCriterion=${searchCriterion}&sortingCriterion=${sortingCriterion}`, // Search Flights By Filters
+        }).then(function (flights) {
+
+            console.log('המערך לפני המיון:');
+            console.log(flights);
+
+            let prop = "AirlineName";
+
+            flights.sort(orderBy(prop));
+
+            console.log('המערך אחרי המיון:');
+            console.log(flights);
+
+          $("#flights-table tbody").empty();
+          buildTable(flights);
+        });
+      }
+      function orderBy(prop) {
+          return function (a, b) {
+              if (!a.hasOwnProperty(prop) || !b.hasOwnProperty(prop))
+                  return 0;
+          if (typeof a[prop] == "number") {
+            return a[prop] - b[prop];
+          } else {
+            return a[prop] < b[prop] ? -1 : a[prop] > b[prop] ? 1 : 0;
+          }
+        };
+      }
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 offset-2">
+          <select id="OriginCountry">
+            <option value="" disabled selected>
+              Choose your origin country
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3 offset-2">
+          <select id="DestinationCountry">
+            <option value="" disabled selected>
+              Choose your destination country
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1">
+          <select id="orderBy">
+            <option value="RemainingTickets" selected>Remaining Tickets</option>
+            <option value="DepartureTime">Departure Time</option>
+            <option value="LandingTime">Landing Time</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 offset-5">
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="searchFlights($('#OriginCountry').val(),$('#DestinationCountry').val(),$('#orderBy').val())"
+          >
+            Primary
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table" id="flights-table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Airline ID</th>
+              <th scope="col">Airline name</th>
+              <th scope="col">Origin country</th>
+              <th scope="col">Departure time</th>
+              <th scope="col">Destination country</th>
+              <th scope="col">Landing time</th>
+              <th scope="col">Remaining tickets</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

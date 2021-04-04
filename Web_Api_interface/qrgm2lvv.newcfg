@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  https://go.microsoft.com/fwlink/?LinkId=301879
+  -->
+<configuration>
+  <configSections>
+    <section name="configBuilders" type="System.Configuration.ConfigurationBuildersSection, System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" restartOnExternalChanges="false" requirePermission="false" />
+  </configSections>
+  <configBuilders>
+    <builders>
+    <add name="Secrets" userSecretsFile="E:\source\repos\Flight_Center_Project_FinalExam\secrets.xml" type="Microsoft.Configuration.ConfigurationBuilders.UserSecretsConfigBuilder, Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    </builders>
+  </configBuilders>
+  <connectionStrings>
+    <remove name="LocalSqlServer" />
+    <add name="LocalSqlServer" connectionString="Data Source=LAPTOP-4DQBPSUQ;Initial Catalog=The_very_important_Flight_Center_Project;Integrated Security=SSPI;Asynchronous Processing=true"
+      providerName="System.Data.SqlClient" />
+  </connectionStrings>

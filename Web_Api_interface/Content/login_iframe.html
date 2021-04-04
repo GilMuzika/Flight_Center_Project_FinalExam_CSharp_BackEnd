@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../Scripts/common_functions.js"></script>
+    <script src="../Scripts/view_clients_html.js"></script>
+    <link rel="stylesheet" type="text/css" href="../Content/common_style.css">
+    <title></title>
+</head>
+<body style="background-image: none; background-color: #5382a5">
+    <table border ="1"  class="FlightsTable">
+       <tr>
+           <td>
+               User Name:
+           </td>
+           <td>
+               <input type="text" id="login_iframe_username" />
+           </td>
+       </tr> 
+       <tr>
+           <td>
+               Password:
+           </td>
+           <td>
+               <input type="text" id="login_iframe_password" />
+           </td>
+       </tr>
+    </table>
+    <br />
+    <input class="Centering" type="button" value="Login" onclick="pullAllCustomers($('#login_iframe_username').val(), $('#login_iframe_password').val());"/>
+</body>
+</html>

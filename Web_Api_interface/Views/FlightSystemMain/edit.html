@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<!-- the next row is for Google autentication, all additional required code will be added as HTML injection -->
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id" content="192335092013-a0l5g1kbhiel7ih6d1cnol736hbi0cpu.apps.googleusercontent.com">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../Scripts/sweetalert.min.js"></script>
+	<script src="../Scripts/common_functions.js"></script>
+	<script src="../Scripts/edit_clients_html.js"></script>
+
+	<!-- this is google autentication mechanism script -->
+	<script src="../Scripts/google_sign_in_button_script.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="../Content/common_style.css">
+
+	<meta http-equiv="content-type" content="text/html" />
+
+	<title>Edit Customers</title>
+</head>
+
+<body onload="showSignOutGoogleID();">
+
+	<div class="Box">
+
+	</div>
+	<div class="onTopOfTable">
+		<div style="margin: 10px; padding: 10px;">
+			<table class="upperBox" border="0" cellspacing="0" cellpadding="0" style="background: #b3c8d7; padding: 0; margin: 0; border: 0px; border-spacing: 0; border-collapse: collapse; ">
+				<tr>
+					<td><img style="vertical-align: top;" src="/ViewsImages/FlightSystemMain/upperLeftCorner.gif" width="8" /></td>
+					<td></td>
+					<td><img style="vertical-align: top;" src="/ViewsImages/FlightSystemMain/upperRightCorner.gif" width="8" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="vertical-align: middle;">Edit clients<img src="/ViewsImages/FlightSystemMain/search_small.gif" /></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><img style="vertical-align: bottom;" src="/ViewsImages/FlightSystemMain/bottomLeftCorner.gif" width="8" /></td>
+					<td></td>
+					<td><img style="vertical-align: bottom;" src="/ViewsImages/FlightSystemMain/bottomRightCorner.gif" width="8" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- The "datalist" data holder for "search_query_text" textbox -->
+	<datalist id="datalist">
+	</datalist>
+	<table class="FlightsTable">
+		<tr style="text-align: left;">
+			<td width="5">
+				<input type="button" value="Get All Customres" id="get_all_customers_button_" onclick="pullAllCustomers();" />
+			</td>
+			<td width="0"></td>
+			<td>
+				<input type="button" style="visibility: hidden; display: none" id="editing_button" value="Enable editing" onclick="enableEditing();" />
+			<!--
+			<select name="sorting_criterion2" id="sorting_criterion2">
+				<option value="0">ללא מיון</option>
+				<option value="1">לפי מחיר הכרטיס</option>
+				<option value="2">לפי זמן ההמראה</option>
+				<option value="4">לפי משך הטיסה</option>
+			</select>
+			-->
+			</td>
+		</tr>
+	</table>
+	<br />
+	<!-- class "FlightsTable" uses different colors for "<th>" and "<tr>" elements -->
+	<!--
+	<table class="FlightsTable" name="search_text_and_buttons_table">
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				<th>קריטריון החיפוש</th>
+				<th>מיון</th>
+				<th>את מה מחפשים</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="button" value="Search" id="search_button" onclick="getSearchResults($('#search_query_text').val(), $('#search_criterion').val(), $('#sorting_criterion').val());" /></td>
+				<td>
+					<select name="search_criterion" id="search_criterion" onchange="preloadNames($('#search_criterion').val());">
+						<option value="0">שם חברת תעופה</option>
+						<option value="1">שם מדינת היעד</option>
+						<option value="2">שם מדינת המקור</option>
+						<option value="4">מס' הטיסה</option>
+					</select>
+				</td>
+				<td>
+					<select name="sorting_criterion" id="sorting_criterion">
+						<option value="0">ללא מיון</option>
+						<option value="1">לפי מחיר הכרטיס</option>
+						<option value="2">לפי זמן ההמראה</option>
+						<option value="4">לפי משך הטיסה</option>
+					</select>
+				</td>
+				<td><input type="text" list="datalist" autocomplete="on" onkeyup="ac(this.value)" id="search_query_text" value="ABSA - Aerolinhas Brasileiras" /></td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+	-->
+
+	<table class="FlightsTable" id="show_results_table_substitutor" style="visibility: hidden; display: none">
+		<tr>
+			<td style="font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: bold; padding: 10px;">
+				<div class="Centering" style="padding: 10px" id="user_messages_view_clients">
+					Please wait
+				</div>
+				<div id="sign_out_googleID_button" class="Centering">
+					<button onclick="signOut()">Google sign out</button>
+				</div>
+				<div class="Centering" style="padding: 10px" id="running_numbers">
+
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table border="0" class="FlightsTable" id="show_results_table" style="visibility: hidden; display: none">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>&nbsp;<!-- image in the table body --></th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Phone</th>
+				<th>
+				<div class="editCustomers">&nbsp;</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody id="show_results_table_tbody">
+			<!-- The content of this "tbody" tag is filled by JS script by runtime -->
+		</tbody>
+	</table>
+
+
+
+
+	<div class="Box">
+
+	</div>
+</body>
+</html>

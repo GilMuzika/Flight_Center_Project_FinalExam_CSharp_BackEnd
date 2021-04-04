@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../Scripts/sweetalert.min.js"></script>
+	<script src="../Scripts/common_functions.js"></script>
+	<script src="../Scripts/search_html.js"></script>
+	<link rel="stylesheet" type="text/css" href="../Content/common_style.css">
+
+	<meta http-equiv="content-type" content="text/html" />
+
+	<title>Search Flights</title>
+</head>
+
+<body onload="preloadNames(0);">
+
+	<div class="Box">
+
+	</div>
+	<div class="onTopOfTable">
+		<div style="margin: 10px; padding: 10px;">
+			<table class="upperBox" border="0" cellspacing="0" cellpadding="0" style="background: #b3c8d7; padding: 0; margin: 0; border: 0px; border-spacing: 0; border-collapse: collapse; ">
+				<tr>
+					<td><img style="vertical-align: top;" src="/ViewsImages/FlightSystemMain/upperLeftCorner.gif" width="8" /></td>
+					<td></td>
+					<td><img style="vertical-align: top;" src="/ViewsImages/FlightSystemMain/upperRightCorner.gif" width="8" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td style="vertical-align: middle;">Search<img src="/ViewsImages/FlightSystemMain/search_small.gif" /></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><img style="vertical-align: bottom;" src="/ViewsImages/FlightSystemMain/bottomLeftCorner.gif" width="8" /></td>
+					<td></td>
+					<td><img style="vertical-align: bottom;" src="/ViewsImages/FlightSystemMain/bottomRightCorner.gif" width="8" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- The "datalist" data holder for "search_query_text" textbox -->
+	<datalist id="datalist">
+	</datalist>
+	<table class="FlightsTable">
+		<tr style="text-align: left;">
+			<td width="5">
+				<input type="button" value="Get All Flights" id="get_all_flights_button" onclick="getSearchResults('in this mode query text is irrelevant', 8, $('#sorting_criterion2').val());" />
+			</td>
+			<td width="0"></td>
+			<td>
+				<select name="sorting_criterion2" id="sorting_criterion2">
+					<option value="0">ללא מיון</option>
+					<option value="1">לפי מחיר הכרטיס</option>
+					<option value="2">לפי זמן ההמראה</option>
+					<option value="4">לפי משך הטיסה</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<br />
+	<!-- class "FlightsTable" uses different colors for "<th>" and "<tr>" elements -->
+	<table class="FlightsTable" name="search_text_and_buttons_table">
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				<th>קריטריון החיפוש</th>
+				<th>מיון</th>
+				<th>את מה מחפשים</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="button" value="Search" id="search_button" onclick="getSearchResults($('#search_query_text').val(), $('#search_criterion').val(), $('#sorting_criterion').val());" /></td>
+				<td>
+					<select name="search_criterion" id="search_criterion" onchange="preloadNames($('#search_criterion').val());">
+						<option value="0">שם חברת תעופה</option>
+						<option value="1">שם מדינת היעד</option>
+						<option value="2">שם מדינת המקור</option>
+						<option value="4">מס' הטיסה</option>
+					</select>
+				</td>
+				<td>
+					<select name="sorting_criterion" id="sorting_criterion">
+						<option value="0">ללא מיון</option>
+						<option value="1">לפי מחיר הכרטיס</option>
+						<option value="2">לפי זמן ההמראה</option>
+						<option value="4">לפי משך הטיסה</option>
+					</select>
+				</td>
+				<td><input type="text" list="datalist" autocomplete="on" onkeyup="ac(this.value)" id="search_query_text" value="ABSA - Aerolinhas Brasileiras" /></td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+
+	<table class="FlightsTable" id="show_results_table_substitutor" style="visibility: hidden; display: none">
+		<tr>
+			<td style="font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: bold; padding: 10px;">
+				<div class="Centering" style="padding: 10px" id="user_messages">
+					Please wait
+				</div>
+				<div class="Centering" style="padding: 10px" id="running_numbers">
+
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table border="0" class="FlightsTable" id="show_results_table" style="visibility: hidden; display: none">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Flight</th>
+				<th></th>
+				<th>Departing From</th>
+				<th>To</th>
+				<th></th>
+				<th>Duration</th>
+				<th>Est. Time</th>
+				<th>T</th>
+				<!--
+				<th>Status</th>
+				-->
+				<th>Price</th>
+			</tr>
+		</thead>
+		<tbody id="show_results_table_tbody">
+			<!-- The content of this "tbody" tag is filled by JS script by runtime -->
+		</tbody>
+	</table>
+
+
+
+
+	<div class="Box">
+
+	</div>
+</body>
+</html>
